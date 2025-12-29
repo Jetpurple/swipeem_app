@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ⚠️ TEMPORAIRE - Mode développement : Permet tout accès
+    // À RETIRER EN PRODUCTION
+    // Permet la génération de données de test sans authentification
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

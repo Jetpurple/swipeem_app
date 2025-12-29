@@ -1,0 +1,25 @@
+rules_version = '2';
+
+// Règles de sécurité pour Firebase Storage
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Règles pour les photos de profil des utilisateurs
+    match /users/{userId}/profile.jpg {
+      // Permet la lecture à tous les utilisateurs authentifiés
+      allow read: if request.auth != null;
+      
+      // Permet l'écriture et la suppression uniquement pour le propriétaire
+      allow write, delete: if request.auth != null && request.auth.uid == userId;
+      
+      // Validation de la taille et du type de fichier
+      allow write: if request.resource.size < 5 * 1024 * 1024  // Limite à 5 MB
+                   && request.resource.contentType.matches('image/.*');
+    }
+    
+    // Bloquer tout autre accès par défaut
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
