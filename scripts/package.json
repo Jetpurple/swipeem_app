@@ -1,0 +1,30 @@
+{
+  "name": "hire-me-scripts",
+  "version": "1.0.0",
+  "description": "Scripts utilitaires pour la synchronisation Firebase",
+  "scripts": {
+    "build": "tsc",
+    "sync:users": "node dist/syncUsersAuthFirestore.js",
+    "sync:users:dry": "DRY_RUN=true node dist/syncUsersAuthFirestore.js",
+    "sync:users:dev": "ts-node syncUsersAuthFirestore.ts",
+    "sync:users:dev:dry": "DRY_RUN=true ts-node syncUsersAuthFirestore.ts",
+    "reset:users": "ts-node resetAndSeedUsers.ts",
+    "reset:users:dry": "DRY_RUN=true ts-node resetAndSeedUsers.ts",
+    "make-premium": "node dist/makeAllUsersPremium.js",
+    "make-premium:dry": "DRY_RUN=true node dist/makeAllUsersPremium.js",
+    "make-premium:dev": "ts-node makeAllUsersPremium.ts",
+    "make-premium:dev:dry": "DRY_RUN=true ts-node makeAllUsersPremium.ts"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+

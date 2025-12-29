@@ -1,4 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permissions pour la caméra et la galerie photo -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    
     <application
         android:label="hire_me"
         android:name="${applicationName}"

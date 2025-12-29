@@ -1,0 +1,21 @@
+{
+  "name": "hire-me",
+  "version": "1.0.0",
+  "description": "Hire Me - Application de matching candidat/recruteur",
+  "private": true,
+  "scripts": {
+    "sync:users": "cd scripts && npm run sync:users",
+    "sync:users:dry": "cd scripts && npm run sync:users:dry",
+    "sync:users:dev": "cd scripts && npm run sync:users:dev",
+    "sync:users:dev:dry": "cd scripts && npm run sync:users:dev:dry",
+    "reset:users": "cd scripts && npm run reset:users",
+    "reset:users:dry": "cd scripts && npm run reset:users:dry",
+    "scripts:install": "cd scripts && npm install",
+    "scripts:build": "cd scripts && npm run build",
+    "check:credentials": "cd scripts && ./check-credentials.sh"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+
