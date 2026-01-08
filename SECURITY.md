@@ -48,13 +48,32 @@ Les fichiers suivants sont automatiquement ignorés :
 firebase_options.dart
 ```
 
+**Note** : Le fichier `.env.example` est commité (template sans secrets). Le fichier `.env` est ignoré.
+
 ### Configuration des Secrets
 
 #### Développement Local
 
-1. Créer un fichier `.env.local` (non commité)
-2. Ajouter les secrets nécessaires
-3. Utiliser `--dart-define-from-file=.env.local` (Flutter 3.0+)
+1. **Copier le template** :
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Remplir les variables** dans `.env` (non commité, déjà dans `.gitignore`)
+
+3. **Utiliser dans Flutter** :
+   ```bash
+   # Flutter 3.0+ : Charger depuis .env
+   flutter run --dart-define-from-file=.env
+   
+   # Ou définir manuellement
+   flutter run --dart-define=GOOGLE_CLIENT_ID=your_id
+   ```
+
+4. **Utiliser dans le code** :
+   ```dart
+   const String googleClientId = String.fromEnvironment('GOOGLE_CLIENT_ID');
+   ```
 
 #### Production
 

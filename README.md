@@ -304,6 +304,43 @@ users/{userId}/cv.pdf          # CV (max 10 MB, application/pdf)
 - **Storage = Fichiers uniquement** : Jamais de logique, jamais de données structurées
 - **Données structurées → Firestore** : Utiliser Firestore pour les métadonnées
 
+### Variables d'Environnement
+
+#### Configuration via .env
+
+1. **Copier le template** :
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Remplir les variables** dans `.env` :
+   ```bash
+   GOOGLE_CLIENT_ID=your_client_id.apps.googleusercontent.com
+   LINKEDIN_CLIENT_ID=your_linkedin_client_id
+   LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
+   LINKEDIN_REDIRECT_URL=your_redirect_url
+   GITHUB_CLIENT_ID=your_github_client_id
+   GITHUB_CLIENT_SECRET=your_github_client_secret
+   USE_FIREBASE_EMULATOR=false
+   ```
+
+3. **Utiliser dans Flutter** :
+   ```bash
+   # Flutter 3.0+ : Charger depuis .env
+   flutter run --dart-define-from-file=.env
+   
+   # Ou définir manuellement
+   flutter run --dart-define=GOOGLE_CLIENT_ID=your_id
+   ```
+
+4. **Utiliser dans le code** :
+   ```dart
+   const String googleClientId = String.fromEnvironment('GOOGLE_CLIENT_ID');
+   const String linkedInClientId = String.fromEnvironment('LINKEDIN_CLIENT_ID');
+   ```
+
+⚠️ **Important** : Le fichier `.env` est ignoré par Git (voir `.gitignore`). Ne jamais commiter vos secrets.
+
 ### Auth
 
 #### Création Automatique Users
@@ -834,24 +871,50 @@ flutter run -d chrome --dart-define=USE_FIREBASE_EMULATOR=true
 
 ### Configuration OAuth
 
-#### Google Sign-In
+#### 1. Créer le fichier .env
+
+```bash
+cp .env.example .env
+```
+
+#### 2. Configurer Google Sign-In
+
 1. Firebase Console → Authentication → Sign-in method
 2. Activez Google
 3. Copiez le **Web client ID**
-4. Configurez dans `web/index.html` ou via `--dart-define`
+4. Ajoutez dans `.env` : `GOOGLE_CLIENT_ID=your_client_id.apps.googleusercontent.com`
 
-#### LinkedIn
+#### 3. Configurer LinkedIn
+
 1. [LinkedIn Developers](https://www.linkedin.com/developers/apps)
 2. Créez une app
-3. Notez **Client ID** et **Client Secret**
-4. Configurez les Redirect URLs
-5. **⚠️ Ne jamais commiter les credentials**
+3. Notez **Client ID**, **Client Secret** et **Redirect URL**
+4. Ajoutez dans `.env` :
+   ```
+   LINKEDIN_CLIENT_ID=your_client_id
+   LINKEDIN_CLIENT_SECRET=your_client_secret
+   LINKEDIN_REDIRECT_URL=your_redirect_url
+   ```
 
-#### GitHub
+#### 4. Configurer GitHub
+
 1. GitHub Settings → Developer settings → OAuth Apps
 2. Créez une OAuth App
 3. Notez **Client ID** et **Client Secret**
-4. **⚠️ Ne jamais commiter les credentials**
+4. Ajoutez dans `.env` :
+   ```
+   GITHUB_CLIENT_ID=your_client_id
+   GITHUB_CLIENT_SECRET=your_client_secret
+   ```
+
+#### 5. Lancer l'application
+
+```bash
+# Charger les variables depuis .env
+flutter run --dart-define-from-file=.env
+```
+
+⚠️ **Important** : Ne jamais commiter le fichier `.env` (déjà dans `.gitignore`).
 
 ### Scripts Utiles
 

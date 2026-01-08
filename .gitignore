@@ -101,6 +101,8 @@ firebase.json
 .env.local
 .env.*.local
 *.env
+# Exception: .env.example is a template and should be committed
+!.env.example
 
 # Node modules
 node_modules/
